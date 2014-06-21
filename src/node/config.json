@@ -1,0 +1,6 @@
+ {
+    	"host" : "localhost", 
+    	"port" : "8080",
+    	"caNo" : "473641303166", 
+    	"interval" : "60000"
+ }
