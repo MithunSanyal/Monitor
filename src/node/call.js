@@ -1,9 +1,9 @@
 var http = require('http');
 var mongo = require('mongodb');
 var _ = require('underscore')._;
+var express = require('express');
 
 var file = 'config.json';
-
 
 var jf = require('jsonfile'),
     util = require('util');
@@ -11,6 +11,31 @@ var databaseUrl = "statsdb";
 var collections = ["vms", "vmstats"];
 var db = require("mongojs").connect(databaseUrl, collections);
 
+var app = express();
+
+app.get('/getAllVms', function(req, res) {
+	db.vms.find({}, function(err, items) {
+		res.send(items);
+		});
+});
+app.get('/getAllMaxVmStats',  function(req, res) {
+	db.vmstats.find({"Type" : "Maximum"}, function(err, items) {
+		res.send(items);
+		});
+});
+app.get('/getAllAvgVmStats',  function(req, res) {
+	db.vmstats.find({"Type" : "Average"}, function(err, items) {
+		res.send(items);
+		});
+});
+app.get('/getAllMinVmStats',  function(req, res) {
+	db.vmstats.find({"Type" : "Minimum"}, function(err, items) {
+		res.send(items);
+		});
+});
+
+
+app.listen(3000);
 
 var userConfig = jf.readFileSync(file);
 var hostVal = userConfig.host;
@@ -27,7 +52,8 @@ var vmsOps = {
 	    method: "GET"
 };
 
-var avgVmStatsPath = "/Monitor/getAllAvgVMStatistics?caNo=" + caNoVal + "&from=2014-06-04T04:02:00&to=2014-06-04T04:00:00"; 
+//var avgVmStatsPath = "/Monitor/getAllAvgVMStatistics?caNo=" + caNoVal + "&from=2014-06-04T04:02:00&to=2014-06-04T04:00:00"; 
+var avgVmStatsPath = "/Monitor/getAllAvgVMStatistics?caNo=" + caNoVal;
 var avgVmStatsOps = {
 		 host: hostVal,
 		 port: portVal,
@@ -35,7 +61,7 @@ var avgVmStatsOps = {
 		 method: "GET"
 };
 
-var maxVmStatsPath = "/Monitor/getAllMaxVMStatistics?caNo=" + caNoVal + "&from=2014-06-04T04:02:00&to=2014-06-04T04:00:00";  
+var maxVmStatsPath = "/Monitor/getAllMaxVMStatistics?caNo=" + caNoVal;  
 var maxVmStatsOps = {
 		 host: hostVal,
 		 port: portVal,
@@ -43,7 +69,7 @@ var maxVmStatsOps = {
 		 method: "GET"	
 };
 
-var minVmStatsPath = "/Monitor/getAllMinVMStatistics?caNo=" + caNoVal + "&from=2014-06-04T04:02:00&to=2014-06-04T04:00:00";  
+var minVmStatsPath = "/Monitor/getAllMinVMStatistics?caNo=" + caNoVal;  
 var minVmStatsOps = {
 		 host: hostVal,
 		 port: portVal,

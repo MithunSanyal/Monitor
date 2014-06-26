@@ -123,8 +123,18 @@ public class CloudMonitorImpl {
 		CloudAccount ca = cloudAccounts.get(cloudAccountNumber);
 		String[] regions = null;
 		JSONArray response = new JSONArray();
-		long fromEpoch = getEpochTime(from);
-		long toEpoch = getEpochTime(to);
+		long fromEpoch = 0;
+		long toEpoch = 0;
+		if (from == null || from.isEmpty()) {
+			Calendar now = Calendar.getInstance();
+			now.add(Calendar.MINUTE, -2);
+			fromEpoch = now.getTime().getTime();
+			toEpoch = (new Date()).getTime();
+		} else {
+			fromEpoch = getEpochTime(to);
+			toEpoch = getEpochTime(from);
+		}
+		
 		try{
     	
 			if (ca.getCloudName().equals("aws"))
@@ -176,6 +186,7 @@ public class CloudMonitorImpl {
 							vmObject.put("Average Disk Writes (Bytes)", stats.getAverageDiskWriteBytes());
 							vmObject.put("Average Network Input (Bytes)", stats.getAverageNetworkIn());
 							vmObject.put("Average Network Output (Bytes)", stats.getAverageNetworkOut());
+							vmObject.put("Type", "Average");
 
 						}
 						response.put(vmObject);
@@ -215,8 +226,17 @@ public class CloudMonitorImpl {
 		CloudAccount ca = cloudAccounts.get(cloudAccountNumber);
 		String[] regions = null;
 		JSONArray response = new JSONArray();
-		long fromEpoch = getEpochTime(from);
-		long toEpoch = getEpochTime(to);
+		long fromEpoch = 0;
+		long toEpoch = 0;
+		if (from == null || from.isEmpty()) {
+			Calendar now = Calendar.getInstance();
+			now.add(Calendar.MINUTE, -2);
+			fromEpoch = now.getTime().getTime();
+			toEpoch = (new Date()).getTime();
+		} else {
+			fromEpoch = getEpochTime(to);
+			toEpoch = getEpochTime(from);
+		}
 		try{
     	
 			if (ca.getCloudName().equals("aws"))
@@ -268,6 +288,7 @@ public class CloudMonitorImpl {
 							vmObject.put("Maximum Disk Writes (Bytes)", stats.getMaximumDiskWriteBytes());
 							vmObject.put("Maximum Network Input (Bytes)", stats.getMaximumNetworkIn());
 							vmObject.put("Maximum Network Output (Bytes)", stats.getMaximumNetworkOut());
+							vmObject.put("Type", "Maximun");
 
 						}
 						response.put(vmObject);
@@ -308,8 +329,17 @@ public class CloudMonitorImpl {
 		CloudAccount ca = cloudAccounts.get(cloudAccountNumber);
 		String[] regions = null;
 		JSONArray response = new JSONArray();
-		long fromEpoch = getEpochTime(from);
-		long toEpoch = getEpochTime(to);
+		long fromEpoch = 0;
+		long toEpoch = 0;
+		if (from == null || from.isEmpty()) {
+			Calendar now = Calendar.getInstance();
+			now.add(Calendar.MINUTE, -2);
+			fromEpoch = now.getTime().getTime();
+			toEpoch = (new Date()).getTime();
+		} else {
+			fromEpoch = getEpochTime(to);
+			toEpoch = getEpochTime(from);
+		}
 		try{
     	
 			if (ca.getCloudName().equals("aws"))
@@ -361,6 +391,7 @@ public class CloudMonitorImpl {
 							vmObject.put("Minimum Disk Writes (Bytes)", stats.getMinimumDiskWriteBytes());
 							vmObject.put("Minimum Network Input (Bytes)", stats.getMinimumNetworkIn());
 							vmObject.put("Minimum Network Output (Bytes)", stats.getMinimumNetworkOut());
+							vmObject.put("Type", "Minimum");
 
 						}
 						response.put(vmObject);
@@ -545,8 +576,17 @@ public class CloudMonitorImpl {
 		
 		CloudAccount ca = cloudAccounts.get(cloudAccountNumber);
 		String[] regions = null;
-		long fromEpoch = getEpochTime(from);
-		long toEpoch = getEpochTime(to);
+		long fromEpoch = 0;
+		long toEpoch = 0;
+		if (from == null || from.isEmpty()) {
+			Calendar now = Calendar.getInstance();
+			now.add(Calendar.MINUTE, -2);
+			fromEpoch = now.getTime().getTime();
+			toEpoch = (new Date()).getTime();
+		} else {
+			fromEpoch = getEpochTime(to);
+			toEpoch = getEpochTime(from);
+		}
 		JSONObject vmObject = new JSONObject();
 		try{
 
@@ -589,6 +629,7 @@ public class CloudMonitorImpl {
 						vmObject.put("Average Disk Writes (Bytes)", stats.getAverageDiskWriteBytes());
 						vmObject.put("Average Network Input (Bytes)", stats.getAverageNetworkIn());
 						vmObject.put("Average Network Output (Bytes)", stats.getAverageNetworkOut());
+						vmObject.put("Type", "Average");
 					}
 					
 				}
@@ -628,8 +669,17 @@ public class CloudMonitorImpl {
 		
 		CloudAccount ca = cloudAccounts.get(cloudAccountNumber);
 		String[] regions = null;
-		long fromEpoch = getEpochTime(from);
-		long toEpoch = getEpochTime(to);
+		long fromEpoch = 0;
+		long toEpoch = 0;
+		if (from == null || from.isEmpty()) {
+			Calendar now = Calendar.getInstance();
+			now.add(Calendar.MINUTE, -2);
+			fromEpoch = now.getTime().getTime();
+			toEpoch = (new Date()).getTime();
+		} else {
+			fromEpoch = getEpochTime(to);
+			toEpoch = getEpochTime(from);
+		}
 		JSONObject vmObject = new JSONObject();
 		try{
 
@@ -672,6 +722,7 @@ public class CloudMonitorImpl {
 						vmObject.put("Maximum Disk Writes (Bytes)", stats.getMaximumDiskWriteBytes());
 						vmObject.put("Maximum Network Input (Bytes)", stats.getMaximumNetworkIn());
 						vmObject.put("Maximum Network Output (Bytes)", stats.getMaximumNetworkOut());
+						vmObject.put("Type", "Maximum");
 					}
 					
 				}
@@ -711,8 +762,17 @@ public class CloudMonitorImpl {
 		
 		CloudAccount ca = cloudAccounts.get(cloudAccountNumber);
 		String[] regions = null;
-		long fromEpoch = getEpochTime(from);
-		long toEpoch = getEpochTime(to);
+		long fromEpoch = 0;
+		long toEpoch = 0;
+		if (from == null || from.isEmpty()) {
+			Calendar now = Calendar.getInstance();
+			now.add(Calendar.MINUTE, -2);
+			fromEpoch = now.getTime().getTime();
+			toEpoch = (new Date()).getTime();
+		} else {
+			fromEpoch = getEpochTime(to);
+			toEpoch = getEpochTime(from);
+		}
 		JSONObject vmObject = new JSONObject();
 		try{
 
@@ -755,6 +815,7 @@ public class CloudMonitorImpl {
 						vmObject.put("Minimum Disk Writes (Bytes)", stats.getMinimumDiskWriteBytes());
 						vmObject.put("Minimum Network Input (Bytes)", stats.getMinimumNetworkIn());
 						vmObject.put("Minimum Network Output (Bytes)", stats.getMinimumNetworkOut());
+						vmObject.put("Type", "Minimum");
 					}
 					
 				}
